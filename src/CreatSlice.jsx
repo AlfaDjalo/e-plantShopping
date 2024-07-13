@@ -7,6 +7,7 @@ export const CreatSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
+        alert("In addItem")
         const { name, image, cost } = action.payload;
         const existingItem = state.items.find(item => item.name === name);
         if (existingItem) {
@@ -21,7 +22,7 @@ export const CreatSlice = createSlice({
     updateQuantity: (state, action) => {
         const { name, quantity } = action.payload;
         const itemToUpdate = state.items.find(item => item.name === name);
-        if (itemToUpdate.quantity) {
+        if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
         }
     },
