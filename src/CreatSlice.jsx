@@ -13,6 +13,7 @@ export const CreatSlice = createSlice({
         if (existingItem) {
             existingItem.quantity++;
         } else {
+            alert("Creating new item")
             state.items.push({ name, image, cost, quantity: 1 });
         }
     },

@@ -4,7 +4,7 @@ import { removeItem, updateQuantity } from './CreatSlice';
 import './CartItem.css';
 
 const Cart = ({ onContinueShopping }) => {
-  const cart = useSelector(state => state.cart.items);
+  const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
   // Calculate total amount for all products in the cart
