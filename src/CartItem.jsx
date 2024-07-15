@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CreatSlice';
 import './CartItem.css';
 
-const Cart = ({ onContinueShopping }) => {
+const Cart = ({ setShowCart }) => {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -11,13 +11,13 @@ const Cart = ({ onContinueShopping }) => {
   const calculateTotalAmount = () => {
     let totalAmount = 0;
     cart.forEach((item) => {
-        totalAmount += item.cost * item.quantity;
+        totalAmount += item.cost.substr(1) * item.quantity;
     });
     return totalAmount.toFixed(2); // Ensure the total is formatted to two decimal places
   };
 
   const handleContinueShopping = (e) => {
-    setShowProductList(true);   
+    setShowCart(false);   
   };
 
   const handleCheckoutShopping = (e) => {
@@ -25,7 +25,6 @@ const Cart = ({ onContinueShopping }) => {
   };
 
   const handleIncrement = (item) => {
-    alert("In CartItem handler")
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity+1 }));
   };
 
@@ -43,7 +42,7 @@ const Cart = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    return (item.quantity * parseFloat(item.cost.replace('$', ''))).toFixed(2);
+    return (item.quantity * item.cost.substr(1)).toFixed(2);
   };
 
   return (
@@ -58,7 +57,7 @@ const Cart = ({ onContinueShopping }) => {
               <div className="cart-item-cost">{item.cost}</div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
-                <span className="cart-item-quantity-value"></span>
+                <span className="cart-item-quantity-value">{item.quantity}</span>
                 <button className="cart-item-button cart-item-button-inc" onClick={() => handleIncrement(item)}>+</button>
               </div>
               <div className="cart-item-total">Total: ${calculateTotalCost(item)}</div>

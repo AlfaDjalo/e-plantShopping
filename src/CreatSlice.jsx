@@ -19,11 +19,9 @@ export const CreatSlice = createSlice({
         state.items = state.items.filter(item => item.name !== action.payload);
     },
     updateQuantity: (state, action) => {
-        alert("In updateQuantity")
         const { name, quantity } = action.payload;
         const itemToUpdate = state.items.find(item => item.name === name);
         if (itemToUpdate) {
-            alert("Updating item")
             itemToUpdate.quantity = quantity;
         }
     },
