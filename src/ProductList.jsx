@@ -16,6 +16,12 @@ function ProductList() {
            [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
         }));
     };
+    const handleRemoveFromCart = (product) => {
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [product.name]: false, 
+            }));
+        };
     const handleCartClick = () => {
         setShowCart(true);
       };
@@ -294,7 +300,7 @@ function ProductList() {
         </div>
         }
         <div>
-            { showCart && <CartItem setShowCart={setShowCart}/> }
+            { showCart && <CartItem setShowCart={setShowCart} handleRemoveFromCart={handleRemoveFromCart}/> }
         </div>
     </div>
     );
